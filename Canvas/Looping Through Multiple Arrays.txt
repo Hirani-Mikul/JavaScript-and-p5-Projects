@@ -1,0 +1,76 @@
+var Kingdom = function () {
+    this.Animals = [[], [], []];
+    this.A1 = [];
+};
+Kingdom.prototype.getFoodPos = function () {
+    for (var i = 0; i < this.A1.length; i++) {
+        var a = this.A1[i];
+        for (var j = 0; j < this.A1.length; j++) {
+            var a2 = this.A1[j];
+            if (a !== a2 && a.Type === "A") {
+                if (a2.Type === "B") {
+                    a.getFood(a2.position);
+                }
+            }
+            if (a !== a2 && a.Type === "B") {
+                    if (a2.Type === "C") {
+                        a.getFood(a2.position);
+                    }
+                }
+            if (a.Type === "C") {
+                    a.getFood(food);
+            }
+
+        }
+    }
+};
+Kingdom.prototype.addAnimals1 = function () {
+    this.A1.push(new Animal_1());
+    this.A1.push(new Animal_2());
+    this.A1.push(new Animal_3());
+};
+Kingdom.prototype.updateA1 = function () {
+    for (var i = this.A1.length - 1; i >= 0; i--) {
+        var a1 = this.A1[i];
+        this.getFoodPos();
+        a1.update();
+        a1.display();
+    }
+};
+Kingdom.prototype.addAnimals = function () {
+    this.Animals[0].push(new Animal_1());
+    this.Animals[1].push(new Animal_2());
+    this.Animals[2].push(new Animal_3());
+    // this.Animals[0].push(new Animal_1());
+};
+Kingdom.prototype.findFood = function () {
+    for (var i = this.Animals.length - 1; i >= 0; i--) {
+        var ind = this.Animals[i];
+        for (var j = ind.length - 1; j >= 0; j--) {
+            if (ind[j].Type === "A") {
+                ind[j].getFood(ind[j].position);
+                //ind[j].getFood(this.Animals[1][i].position);
+            }
+            if (ind[j].Type === "B") {
+                ind[j].getFood(this.Animals[2][j].position);
+            }
+            if (ind[j].Type === "C") {
+                ind[j].getFood(food);
+            }
+        }
+    }
+};
+Kingdom.prototype.update = function () {
+    for (var i = this.Animals.length - 1; i >= 0; i--) {
+        var ind = this.Animals[i];
+        for (var j = ind.length - 1; j >= 0; j--) {
+            var a = ind[j];
+            //a.getFood();
+            //this.Animals[0][0].getFood(this.Animals[1][0].position);
+            this.findFood();
+            a.update();
+            a.display();
+            
+        }
+    }
+};
